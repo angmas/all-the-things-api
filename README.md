@@ -16,6 +16,11 @@ return $.ajax({
 })
 
 }
+
+{
+  image[file]: //file data
+  image[tags]:  // JSON stringified array of tags
+}
 ```
 
-Data needs to be stored in `image[file]`. 
+Data needs to be stored in `image[file]`.

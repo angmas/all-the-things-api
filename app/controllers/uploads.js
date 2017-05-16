@@ -4,8 +4,8 @@ const controller = require('lib/wiring/controller')
 const models = require('app/models')
 const Upload = models.upload
 
-// const authenticate = require('./concerns/authenticate')
-// const setUser = require('./concerns/set-current-user')
+const authenticate = require('./concerns/authenticate')
+const setUser = require('./concerns/set-current-user')
 const setModel = require('./concerns/set-mongoose-model')
 
 const s3Upload = require('../../lib/s3-upload')
@@ -50,7 +50,8 @@ const create = (req, res, next) => {
     .then((s3Response) => {
       return Upload.create({
         url: s3Response.Location,
-        title: file.title
+        title: file.title,
+        _owner: req.user._id
       })
     })
     .then((upload) => res.json({ upload }))
@@ -78,8 +79,8 @@ module.exports = controller({
   destroy
 }, { before: [
   { method: multerUpload.single('image[file]'), only: ['create'] },
-  // { method: setUser, only: ['index', 'show'] },
-  // { method: authenticate, except: ['index', 'show'] },
+  { method: setUser, only: ['index', 'show'] },
+  { method: authenticate, except: ['index', 'show'] },
   { method: setModel(Upload), only: ['show'] },
   { method: setModel(Upload, { forUser: true }), only: ['update', 'destroy'] }
 ] })

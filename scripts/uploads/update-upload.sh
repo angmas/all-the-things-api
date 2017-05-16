@@ -18,3 +18,7 @@ curl "${API}${URL_PATH}/${ID}" \
   }'
 
 echo
+
+URL="google.com"
+
+"url": "'"${URL}"'",

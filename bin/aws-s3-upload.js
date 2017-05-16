@@ -12,6 +12,9 @@ const file = {
   title: process.argv[3] || 'default',
   originalname: process.argv[2] // everything after the last slash
 }
+const user = {
+  _id: '591b064c3751be13af704737'
+}
 
 file.mimetype = mime.lookup(file.path)
 
@@ -20,7 +23,8 @@ s3Upload(file)
    console.log('inside s3 response is ', s3Response)
    return Upload.create({
      url: s3Response.Location,
-     title: file.title
+     title: file.title,
+     _owner: user._id
    })
  })
  .then(() => {

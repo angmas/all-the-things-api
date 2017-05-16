@@ -13,7 +13,7 @@ const file = {
   originalname: process.argv[2] // everything after the last slash
 }
 const user = {
-  _id: '591b064c3751be13af704737'
+  _id: '591b37f62938bd1d98ad91d3'
 }
 
 file.mimetype = mime.lookup(file.path)

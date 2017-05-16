@@ -14,7 +14,11 @@ const s3Upload = require('../../lib/s3-upload')
 const multer = require('multer')
 const multerUpload = multer({ dest: '/tmp/' })
 
+// Retrieve all of the uploaded items
 const index = (req, res, next) => {
+  // console.log('req.body is', req.body)
+  // console.log('req.file ', req.file)
+
   Upload.find()
     .then(uploads => res.json({
       uploads: uploads.map((e) =>

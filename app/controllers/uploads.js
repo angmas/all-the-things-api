@@ -14,7 +14,11 @@ const s3Upload = require('../../lib/s3-upload')
 const multer = require('multer')
 const multerUpload = multer({ dest: '/tmp/' })
 
+// Retrieve all of the uploaded items
 const index = (req, res, next) => {
+  // console.log('req.body is', req.body)
+  // console.log('req.file ', req.file)
+
   Upload.find()
     .then(uploads => res.json({
       uploads: uploads.map((e) =>
@@ -23,6 +27,10 @@ const index = (req, res, next) => {
     .catch(next)
 }
 
+// setModel(Upload) is going to search for the id in the request
+// Once it finds that id, it will return the uploadSchema
+// setModel will add it to the request
+// Then, show will take in the request and generate a JSON response
 const show = (req, res) => {
   res.json({
     upload: req.upload.toJSON({ virtuals: true, user: req.user })
@@ -60,6 +68,7 @@ const create = (req, res, next) => {
 
 const update = (req, res, next) => {
   delete req.body._owner  // disallow owner reassignment.
+  delete req.body.url // disallow url reassignment
   req.upload.update(req.body.upload)
     .then(() => res.sendStatus(204))
     .catch(next)

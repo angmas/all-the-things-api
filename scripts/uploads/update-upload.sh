@@ -2,9 +2,11 @@
 
 API="http://localhost:4741"
 URL_PATH="/uploads"
-ID=591b388fafc10523b3efee8d
-TOKEN=sfq0ufltW9uAO+05vdn7MaeHhJgwz8nbi4+tnUt6Ztg=--zZPhwwgVw01lUFGcFF/548jhcV4nnfT8nvNsemzgpfU=
+ID=591b5bb9efe5ed3b9a4c380f
+TOKEN=TiCtFFrw0qW/z7T3flPcRGvF+keesJDtuRMxaL53MtU=--2MnJAxK+BQe6p0DbCHHcUApmk31elTUCYzc3ltedMvs=
 TITLE="prarie-pic"
+
+
 
 curl "${API}${URL_PATH}/${ID}" \
   --include \
@@ -13,7 +15,8 @@ curl "${API}${URL_PATH}/${ID}" \
   --header "Authorization: Token token=${TOKEN}" \
   --data '{
     "upload": {
-      "title": "'"${TITLE}"'"
+      "title": "'"${TITLE}"'",
+      "tags": ["two","three","four"]
     }
   }'
 

@@ -45,7 +45,7 @@ const show = (req, res) => {
 const create = (req, res, next) => {
   console.log('req.body is', req.body)
   // next()
-  console.log('req.file ', req.file)
+  const tags = JSON.parse(req.body.image.tags)
 
   const file = {
     path: req.file.path,
@@ -59,6 +59,7 @@ const create = (req, res, next) => {
       return Upload.create({
         url: s3Response.Location,
         title: file.title,
+        tags: tags,
         _owner: req.user._id
       })
     })

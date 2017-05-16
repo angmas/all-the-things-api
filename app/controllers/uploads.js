@@ -27,6 +27,10 @@ const index = (req, res, next) => {
     .catch(next)
 }
 
+// setModel(Upload) is going to search for the id in the request
+// Once it finds that id, it will return the uploadSchema
+// setModel will add it to the request
+// Then, show will take in the request and generate a JSON response
 const show = (req, res) => {
   res.json({
     upload: req.upload.toJSON({ virtuals: true, user: req.user })

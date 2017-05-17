@@ -45,7 +45,7 @@ const show = (req, res) => {
 const create = (req, res, next) => {
   console.log('req.body is', req.body)
   // next()
-  const tags = JSON.parse(req.body.image.tags)
+  // const tags = JSON.parse(req.body.image.tags)
   const title = req.body.image.title.trim() || req.file.originalname
   console.log(title)
   console.log(req.file.originalname)
@@ -61,7 +61,7 @@ const create = (req, res, next) => {
       return Upload.create({
         url: s3Response.Location,
         title: file.title,
-        tags: tags,
+        // tags: tags,
         _owner: req.user._id
       })
     })

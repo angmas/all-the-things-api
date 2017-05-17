@@ -103,7 +103,14 @@ const create = (req, res, next) => {
 const update = (req, res, next) => {
   delete req.body._owner  // disallow owner reassignment.
   delete req.body.url // disallow url reassignment
-  req.upload.update(req.body.upload)
+
+  //  remove leading and trailing spaces from title
+  // we don't want to store a title that has only spaces
+  const file = req.body.upload
+  file.title = file.title.trim()
+
+  console.log(file)
+  req.upload.update(file, {runValidators: true})
     .then(() => res.sendStatus(204))
     .catch(next)
 }

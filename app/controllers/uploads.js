@@ -46,10 +46,12 @@ const create = (req, res, next) => {
   console.log('req.body is', req.body)
   // next()
   const tags = JSON.parse(req.body.image.tags)
-
+  const title = req.body.image.title.trim() || req.file.originalname
+  console.log(title)
+  console.log(req.file.originalname)
   const file = {
     path: req.file.path,
-    title: req.file.originalname,
+    title: title,
     originalname: req.file.originalname,
     mimetype: req.file.mimetype
   }

@@ -1,8 +1,8 @@
 #!/bin/sh
 
 API="http://localhost:4741"
-URL_PATH="/useruploads"
-TOKEN=94ZSxaB0HbzYGlMEzI5dfaEies6wK+eVCfE/h+47TQk=--hiDryAcKyVnd1hVPQ/y999kXreF2jJcXtIM/p+S6vfA=
+URL_PATH="/folders"
+TOKEN="OuDtsQiR9Gcl+3IdRP+Qy2VPPTIS7ykCGgdwTmttahU=--iwFGFOLmLqgHDAs+hYKNA864zO5ulzOP3RLfyiDjJ/8="
 ID=591c58cdc62a9e09239ebc89
 curl "${API}${URL_PATH}/${ID}" \
   --include \

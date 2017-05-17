@@ -29,38 +29,30 @@ const index = (req, res, next) => {
     .catch(next)
 }
 
-const indexByUser = (req, res, next) => {
-  const uploadsByDate = {}
-  let email = ''
-  User.findOne({_id: req.params.id}, {email: 1, _id: 0})
+const folders = (req, res, next) => {
+  const returnUser = {}
+  User.findOne({_id: req.params.id}, {email: 1})
   .then(user => {
-    // console.log(email)
-    email = user.email
+    returnUser.email = user.email
+    returnUser.id = user.id
   })
   .then(() =>
-   Upload.find({_owner: req.params.id})
+   Upload.distinct('path', {_owner: req.params.id})
   )
-  // get unique dates
-  .then(uploads => {
-    // const uploadsByDate = {}
-    const dates = uploads.map(upload => {
-      // return upload.createdAt
-      return moment(upload.createdAt).format('MM-DD-YYYY')
-    })
-    const uniqueDates = dates.filter((e, i, a) => a.indexOf(e) === i)
-    uniqueDates.forEach((date) => {
-      // make each unique date a key on the object, then set the
-      // value to be the array of documents that has that createdAt
-      uploadsByDate[date] = uploads.filter(upload => {
-        return moment(upload.createdAt).format('MM-DD-YYYY') === date
-      })
-    })
-    // return uploadsByDate
-  })
-  .then(() => res.json({
-    email: email,
-    uploads: uploadsByDate
+  .then((folders) => res.json({
+    user: returnUser,
+    folders: folders
   }))
+  .catch(next)
+}
+
+// Requires a folder path and an owner id
+const uploadsByFolder = (req, res, next) => {
+  const {owner, path} = req.params
+  Upload.find({_owner: owner, path: path})
+  .then(uploads => {
+    res.json(uploads)
+  })
   .catch(next)
 }
 
@@ -128,7 +120,8 @@ module.exports = controller({
   create,
   update,
   destroy,
-  indexByUser
+  folders,
+  uploadsByFolder
 }, { before: [
   { method: multerUpload.single('image[file]'), only: ['create'] },
   { method: setUser, only: ['index', 'show'] },

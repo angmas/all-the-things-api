@@ -12,6 +12,7 @@ module.exports = require('lib/wiring/routes')
 .resources('uploads')
 
 // users of the app have special requirements
+.get('/uploadowners', 'users#usersWithDocs')
 .post('/sign-up', 'users#signup')
 .post('/sign-in', 'users#signin')
 .delete('/sign-out/:id', 'users#signout')

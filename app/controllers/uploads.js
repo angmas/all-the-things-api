@@ -76,7 +76,7 @@ const create = (req, res, next) => {
   // next()
   // const tags = JSON.parse(req.body.image.tags)
   const title = req.body.image.title.trim() || req.file.originalname
-  const path = moment().add(-1, 'days').format('MM-DD-YYYY')
+  const path = moment().format('MM-DD-YYYY')
   console.log(title)
   console.log(req.file.originalname)
   const file = {

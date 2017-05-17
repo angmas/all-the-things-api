@@ -10,6 +10,7 @@ module.exports = require('lib/wiring/routes')
 // standards RESTful routes
 .resources('examples')
 .resources('uploads')
+.get('/useruploads/:id', 'uploads#indexByUser')
 
 // users of the app have special requirements
 .get('/uploadowners', 'users#usersWithDocs')

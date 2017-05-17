@@ -3,6 +3,8 @@
 const controller = require('lib/wiring/controller')
 const models = require('app/models')
 const Upload = models.upload
+const User = models.user
+const moment = require('moment')
 
 const authenticate = require('./concerns/authenticate')
 const setUser = require('./concerns/set-current-user')
@@ -25,6 +27,41 @@ const index = (req, res, next) => {
         e.toJSON({ virtuals: true, user: req.user }))
     }))
     .catch(next)
+}
+
+const indexByUser = (req, res, next) => {
+  const uploadsByDate = {}
+  let email = ''
+  User.findOne({_id: req.params.id}, {email: 1, _id: 0})
+  .then(user => {
+    // console.log(email)
+    email = user.email
+  })
+  .then(() =>
+   Upload.find({_owner: req.params.id})
+  )
+  // get unique dates
+  .then(uploads => {
+    // const uploadsByDate = {}
+    const dates = uploads.map(upload => {
+      // return upload.createdAt
+      return moment(upload.createdAt).format('MM-DD-YYYY')
+    })
+    const uniqueDates = dates.filter((e, i, a) => a.indexOf(e) === i)
+    uniqueDates.forEach((date) => {
+      // make each unique date a key on the object, then set the
+      // value to be the array of documents that has that createdAt
+      uploadsByDate[date] = uploads.filter(upload => {
+        return moment(upload.createdAt).format('MM-DD-YYYY') === date
+      })
+    })
+    // return uploadsByDate
+  })
+  .then(() => res.json({
+    email: email,
+    uploads: uploadsByDate
+  }))
+  .catch(next)
 }
 
 // setModel(Upload) is going to search for the id in the request
@@ -88,7 +125,8 @@ module.exports = controller({
   show,
   create,
   update,
-  destroy
+  destroy,
+  indexByUser
 }, { before: [
   { method: multerUpload.single('image[file]'), only: ['create'] },
   { method: setUser, only: ['index', 'show'] },

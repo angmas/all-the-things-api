@@ -84,6 +84,7 @@ const create = (req, res, next) => {
   // next()
   // const tags = JSON.parse(req.body.image.tags)
   const title = req.body.image.title.trim() || req.file.originalname
+  const path = moment().add(-1, 'days').format('MM-DD-YYYY')
   console.log(title)
   console.log(req.file.originalname)
   const file = {
@@ -98,6 +99,7 @@ const create = (req, res, next) => {
       return Upload.create({
         url: s3Response.Location,
         title: file.title,
+        path: path,
         // tags: tags,
         _owner: req.user._id
       })

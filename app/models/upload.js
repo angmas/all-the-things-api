@@ -16,6 +16,10 @@ const uploadSchema = new mongoose.Schema({
     type: Array,
     required: false
   },
+  path: {
+    type: String,
+    require: true
+  },
   _owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

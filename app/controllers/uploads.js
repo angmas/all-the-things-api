@@ -3,6 +3,8 @@
 const controller = require('lib/wiring/controller')
 const models = require('app/models')
 const Upload = models.upload
+const User = models.user
+const moment = require('moment')
 
 const authenticate = require('./concerns/authenticate')
 const setUser = require('./concerns/set-current-user')
@@ -27,6 +29,33 @@ const index = (req, res, next) => {
     .catch(next)
 }
 
+const folders = (req, res, next) => {
+  const returnUser = {}
+  User.findOne({_id: req.params.id}, {email: 1})
+  .then(user => {
+    returnUser.email = user.email
+    returnUser.id = user.id
+  })
+  .then(() =>
+   Upload.distinct('path', {_owner: req.params.id})
+  )
+  .then((folders) => res.json({
+    user: returnUser,
+    folders: folders
+  }))
+  .catch(next)
+}
+
+// Requires a folder path and an owner id
+const uploadsByFolder = (req, res, next) => {
+  const {owner, path} = req.params
+  Upload.find({_owner: owner, path: path})
+  .then(uploads => {
+    res.json(uploads)
+  })
+  .catch(next)
+}
+
 // setModel(Upload) is going to search for the id in the request
 // Once it finds that id, it will return the uploadSchema
 // setModel will add it to the request
@@ -47,6 +76,7 @@ const create = (req, res, next) => {
   // next()
   // const tags = JSON.parse(req.body.image.tags)
   const title = req.body.image.title.trim() || req.file.originalname
+  const path = moment().format('MM-DD-YYYY')
   console.log(title)
   console.log(req.file.originalname)
   const file = {
@@ -61,6 +91,7 @@ const create = (req, res, next) => {
       return Upload.create({
         url: s3Response.Location,
         title: file.title,
+        path: path,
         // tags: tags,
         _owner: req.user._id
       })
@@ -88,7 +119,9 @@ module.exports = controller({
   show,
   create,
   update,
-  destroy
+  destroy,
+  folders,
+  uploadsByFolder
 }, { before: [
   { method: multerUpload.single('image[file]'), only: ['create'] },
   { method: setUser, only: ['index', 'show'] },

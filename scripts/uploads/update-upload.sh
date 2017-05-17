@@ -2,11 +2,9 @@
 
 API="http://localhost:4741"
 URL_PATH="/uploads"
-ID=591b5bb9efe5ed3b9a4c380f
-TOKEN=TiCtFFrw0qW/z7T3flPcRGvF+keesJDtuRMxaL53MtU=--2MnJAxK+BQe6p0DbCHHcUApmk31elTUCYzc3ltedMvs=
-TITLE="prarie-pic"
-
-
+ID=591c93de32c5321900af10e2
+TOKEN=q+7S2gbKTvLtvXWWKOWxwEgvZXFPbpIGh3BS3fpSTrI=--iJ7BsKfxDLTuXNP3X4uc+LiVq1NmaRMoZx9ipUsWYss=
+TITLE="english-muffin"
 
 curl "${API}${URL_PATH}/${ID}" \
   --include \
@@ -15,13 +13,8 @@ curl "${API}${URL_PATH}/${ID}" \
   --header "Authorization: Token token=${TOKEN}" \
   --data '{
     "upload": {
-      "title": "'"${TITLE}"'",
-      "tags": ["two","three","four"]
+      "title": "'"${TITLE}"'"
     }
   }'
 
 echo
-
-URL="google.com"
-
-"url": "'"${URL}"'",

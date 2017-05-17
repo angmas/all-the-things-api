@@ -49,7 +49,7 @@ const create = (req, res, next) => {
 
   const file = {
     path: req.file.path,
-    title: req.file.originalname,
+    title: req.body.image.title,
     originalname: req.file.originalname,
     mimetype: req.file.mimetype
   }

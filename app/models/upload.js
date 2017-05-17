@@ -9,7 +9,8 @@ const uploadSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    required: true
+    required: true,
+    maxlength: [140, 'Title cannot exceed 140 characters']
   },
   tags: {
     type: Array,

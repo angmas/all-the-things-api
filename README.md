@@ -301,11 +301,44 @@ All of the upload actions, except for `placeholder`, follow the RESTful style.
   <td><em>empty</em></td>
 </tr>
 <tr>
-<td>PATCH</td>
-<td>`/games/:id`</td>
-<td><strong>game delta</strong></td>
+<td>GET</td>
+<td>`/uploadowners`</td>
+<td><strong>n/a</strong></td>
 <td>200, OK</td>
-<td><strong>game updated</strong></td>
+<td><strong>users</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><strong>errors</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>404 Not Found</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>GET</td>
+<td>`/uploads/folder/:path/:owner`</td>
+<td><strong>n/a</strong></td>
+<td>200, OK</td>
+<td><strong>user</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><strong>errors</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>404 Not Found</td>
+  <td><em>empty</em></td>
+</tr>
+<td>GET</td>
+<td>`/folders/:id`</td>
+<td><strong>n/a</strong></td>
+<td>200, OK</td>
+<td><strong>uploads</strong></td>
 </tr>
 <tr>
   <td colspan="3"></td>
@@ -319,7 +352,118 @@ All of the upload actions, except for `placeholder`, follow the RESTful style.
 </tr>
 </table>
 
+### index
 
+The `index` action is a *GET* that retrieves all the uploads.
+
+```curl script
+API="http://localhost:4741"
+URL_PATH="/uploads"
+TOKEN="<put in token value>"
+
+curl "${API}${URL_PATH}" \
+  --include \
+  --request GET \
+  --header "Authorization: Token token=$TOKEN"
+```
+The response body will contain JSON containing an array of uploads, e.g.:
+
+```json
+{
+	"uploads": [
+		{
+			"_id": "591cc467536d1569b139bf1a",
+			"updatedAt": "2017-05-18T14:04:02.174Z",
+			"createdAt": "2017-05-17T21:45:11.114Z",
+			"url": "https://angmas-bucket.s3.amazonaws.com/2017-05-17/17e7f8f0d2b438d899a75bbab492563a.jpg",
+			"title": "readme update",
+			"path": "05-17-2017",
+			"_owner": "591c59777727f733df13226d",
+			"__v": 0,
+			"tags": [],
+			"length": 13,
+			"id": "591cc467536d1569b139bf1a",
+			"editable": true
+		},
+		{
+			"_id": "591cc47d536d1569b139bf1b",
+			"updatedAt": "2017-05-17T21:54:56.402Z",
+			"createdAt": "2017-05-17T21:45:33.314Z",
+			"url": "https://angmas-bucket.s3.amazonaws.com/2017-05-17/09f3ca217a85d06b9ee14dceb9ccd17c.jpg",
+			"title": "updated file",
+			"path": "05-17-2017",
+			"_owner": "591c59777727f733df13226d",
+			"__v": 0,
+			"tags": [],
+			"length": 12,
+			"id": "591cc47d536d1569b139bf1b",
+			"editable": true
+		},
+		{
+			"_id": "591d7e665ad4d7b4784f3d04",
+			"updatedAt": "2017-05-18T10:58:46.076Z",
+			"createdAt": "2017-05-18T10:58:46.076Z",
+			"url": "https://angmas-bucket.s3.amazonaws.com/2017-05-18/c81d3547b7727fb67625c47097b87d23.jpg",
+			"title": "b's first file",
+			"path": "05-18-2017",
+			"_owner": "591c877eabc5913dc26bbfab",
+			"__v": 0,
+			"tags": [],
+			"length": 14,
+			"id": "591d7e665ad4d7b4784f3d04",
+			"editable": false
+		},
+		{
+			"_id": "591da719a88daecd40d9935e",
+			"updatedAt": "2017-05-18T13:52:25.776Z",
+			"createdAt": "2017-05-18T13:52:25.776Z",
+			"url": "https://angmas-bucket.s3.amazonaws.com/2017-05-18/4f3f37758d730f4dcb22268fa71d3156.jpg",
+			"title": "for readme",
+			"path": "05-18-2017",
+			"_owner": "591c59777727f733df13226d",
+			"__v": 0,
+			"tags": [],
+			"length": 10,
+			"id": "591da719a88daecd40d9935e",
+			"editable": true
+		}
+	]
+}
+```
+
+If there are no uploads at all, the response body will contain
+ an empty uploads array, e.g.:
+
+```json
+{
+  "uploads": [
+  ]
+}
+```
+### create
+
+The `create` action expects a *POST* with an empty body (e.g `''` or `'{}'` if
+ JSON).
+If the request is successful, the response will have an HTTP Status of 201
+ Created, and the body will contain JSON of the created upload, e.g.:
+
+```json
+{
+  "game": {
+    "id": 3,
+    "cells": ["","","","","","","","",""],
+    "over": false,
+    "player_x": {
+      "id": 1,
+      "email": "and@and.com"
+    },
+    "player_o": null
+  }
+}
+```
+
+If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
+ Request, and the response body will be JSON describing the errors.
 # Get Folders By User
 
 ## Route

@@ -1,12 +1,13 @@
 {
-  "name": "ga-wdi-boston.express-multer-upload-api",
+  "name": "all-the-things-api",
   "version": "0.1.1",
   "private": true,
   "scripts": {
-    "start": "grunt server"
+    "start": "./bin/express server"
   },
   "engines": {
-    "node": "4.6.2"
+    "node": "6.10.3",
+    "npm": "4.5.0"
   },
   "dependencies": {
     "aws-sdk": "^2.50.0",

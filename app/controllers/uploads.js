@@ -51,7 +51,10 @@ const uploadsByFolder = (req, res, next) => {
   const {owner, path} = req.params
   Upload.find({_owner: owner, path: path})
   .then(uploads => {
-    res.json(uploads)
+    res.json({
+      uploads: uploads.map((e) =>
+        e.toJSON({ virtuals: true, user: req.user }))
+    })
   })
   .catch(next)
 }

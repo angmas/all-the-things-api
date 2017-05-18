@@ -202,11 +202,13 @@ The `sign-out` and `change-password` requests must include a valid HTTP header
 
 ## Upload actions
 
-All upload action requests must include a valid HTTP header `Authoriazation: Token token=<token>` or they will be rejected with a status of 401 Unauthoirzed.
+An upload is associated with a user. In the All-the-things community, a user has the ability to read and download any content, even those belonging to other users. A user may only make updates to the uploads that s/he owns.
+
+All upload action requests must include a valid HTTP header `Authoriazation: Token token=<token>` or they will be rejected with a status of 401 Unauthorized.
 
 All of the upload actions, except for `placeholder`, follow the RESTful style.
 
-An upload is associated with a user. In the All-the-things community, a user has the ability to read and download any content, even those belonging to other users. A user may only make updates to the uploads that s/he owns.
+
 
 *Summary:*
 
@@ -224,32 +226,24 @@ An upload is associated with a user. In the All-the-things community, a user has
 </tr>
 <tr>
 <td>GET</td>
-<td>`/games[?over=<true|false>]`</td>
+<td>`/uploads`</td>
 <td>n/a</td>
 <td>200, OK</td>
-<td><strong>games found</strong></td>
+<td><strong>uploads</strong></td>
 </tr>
 <tr>
   <td colspan="3">
-  The optional `over` query parameter restricts the response to games with a
-   matching `over` property.
-  </td>
-  <td>200, OK</td>
-  <td><em>empty games</em></td>
-</tr>
-<tr>
-  <td colspan="3">
-  The default is to retrieve all games associated with the user..
+  Any user is authorized to do a GET for a single upload.
   </td>
   <td>401 Unauthorized</td>
   <td><em>empty</em></td>
 </tr>
 <tr>
 <td>POST</td>
-<td>`/games`</td>
+<td>`/uploads`</td>
 <td>n/a</td>
-<td>201, Created</td>
-<td><strong>game created</strong></td>
+<td>204, No Content</td>
+<td><strong>n/a</strong></td>
 </tr>
 <tr>
   <td colspan="3">
@@ -265,10 +259,17 @@ An upload is associated with a user. In the All-the-things community, a user has
 </tr>
 <tr>
 <td>GET</td>
-<td>`/games/:id`</td>
+<td>`/uploads/:id`</td>
 <td>n/a</td>
 <td>200, OK</td>
-<td><strong>game found</strong</td>
+<td><strong>upload</strong</td>
+</tr>
+<tr>
+  <td colspan="3">
+  Any user is authorized to do a GET for a single upload.
+  </td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
   <td colspan="3">
@@ -284,10 +285,10 @@ An upload is associated with a user. In the All-the-things community, a user has
 </tr>
 <tr>
 <td>PATCH</td>
-<td>`/games/:id`</td>
-<td><em>empty</em></td>
-<td>200, OK</td>
-<td><strong>game joined</strong></td>
+<td>`/uploads/:id`</td>
+<td><em>upload</em></td>
+<td>204, No Content</td>
+<td><strong>empty</strong></td>
 </tr>
 <tr>
   <td colspan="3"></td>

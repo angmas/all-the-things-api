@@ -32,6 +32,31 @@ const index = (req, res, next) => {
     .catch(next)
 }
 
+const usersWithDocs = (req, res, next) => {
+  User.aggregate(
+    [{
+      $lookup: {
+        from: 'uploads',
+        localField: '_id',
+        foreignField: '_owner',
+        as: 'uploadsArray'
+      }
+    }]
+  )
+  .then(users => {
+    return users.filter(user => user.uploadsArray.length > 0)
+  })
+  .then(users => {
+    return users.map(user => {
+      return { email: user.email,
+        id: user._id }
+    }
+      )
+  })
+  .then(users => res.json({ users }))
+  .catch(next)
+}
+
 const show = (req, res, next) => {
   User.findById(req.params.id)
     .then(user => user ? res.json({ user }) : next())
@@ -114,6 +139,7 @@ module.exports = controller({
   signup,
   signin,
   signout,
+  usersWithDocs,
   changepw
 }, { before: [
   { method: authenticate, except: ['signup', 'signin'] }

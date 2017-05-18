@@ -1,6 +1,6 @@
 # All The Things API
 
-All The Things API is the backend process for the web application [All The Things Client]() API to store All The Things data. It allows individuals to register as users of the API, upload and manage their own files, while sharing their uploads with others in the All The Things community.
+All The Things API is the backend process for the web application All The Things Client. It allows individuals to register as users of the API, upload and manage their own files, while sharing their uploads with others in the All The Things community.
 
 # Links
 * [All The Things API](https://guarded-cliffs-28165.herokuapp.com/)
@@ -27,7 +27,7 @@ Install with `npm install`
 4. Run the API server with `npm start`. If you want your code to be reloaded on change, you should `npm install -g nodemon` and use `nodemon` instead of `npm start`.
 
 # Structure
-* Dependencies are stored in `package.json`./
+* Dependencies are stored in `package.json`.
 * Do not configure `grunt` packages directly in the
 [`Gruntfile.js`](Gruntfile.js). Instead, store configurations in the
 [`grunt`](grunt) directory. You won't need a top-level key, since that's
@@ -36,7 +36,7 @@ object stored in the `grunt` directory.
 * Developers should store JavaScript files in [`app/controllers`](app/controllers)
  and [`app/models`](app/models).
 * Routes are stored in [`config/routes.js`](config/routes.js)
-Curl Scripts are stored in [`scripts/`](scripts/)
+* Curl Scripts are stored in [`scripts/`](scripts/)
 
 
 ## API end-points
@@ -321,11 +321,12 @@ The following maps the user actions/experience with the API actions:
 
 * User signs up (#signon).
 * After sign up, the user signs in (#signin).
-* After successful sign on, the application displays the list of owner folders (#usersWithDocs).
+* After successful sign in, the application displays the list of owner folders (#usersWithDocs).
 * When the user selects on an owner's folder, the application displays the selected owner's list of sub folders (#folders) which are by upload date.
 * When the user selects a sub folder, the application displays the selected owner's files that were uploaded on that date (#uploadsByFolder).
 * Users are allowed to update the `title` of their own uploads (#update).
-* Users are allowed to delete their own uploads (#destroy)
+* Users are allowed to delete their own uploads (#destroy).
+
 Note: `editable: true` is set for uploads whose `_owner` is the same as the user's `_id`. This is how the application determines when to show update and delete buttons.
 
 
@@ -770,7 +771,26 @@ curl "${API}${URL_PATH}" \
   --request GET \
   --header "Authorization: Token token=$TOKEN"
 ```
-If the request is successful, the response will have an HTTP Status of 204 No Content.
+If the request is successful, the response body will contain JSON containing an array of folder paths for the owner, e.g.:
+
+```json
+{
+	"users": [
+		{
+			"email": "a",
+			"id": "591c59777727f733df13226d"
+		},
+		{
+			"email": "b",
+			"id": "591c877eabc5913dc26bbfab"
+		},
+		{
+			"email": "c",
+			"id": "591e312527ac5de8be53ce58"
+		}
+	]
+}
+```
 
 If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
  Request, and the response body will be JSON describing the errors.

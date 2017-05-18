@@ -1,6 +1,6 @@
 # An All-the-things data store API
 
-An API to store All-the-things data. It allows the players to register as users of the API, upload and manage their own files, while sharing content with others in the All-the-things community.
+An API to store All-the-things data. It allows individuals to register as users of the API, upload and manage their own files, while sharing their uploads with others in the All-the-things community.
 
 ## API end-points
 | Verb   | URI Pattern                    | Controller#Action         |
@@ -201,7 +201,7 @@ The `sign-out` and `change-password` requests must include a valid HTTP header
  401 Unauthorized.
 
 
-## Upload actions
+## Upload Actions
 
 An upload is associated with a user. In the All-the-things community, a user has the ability to read and download any content, even those belonging to other users. A user may only make updates to the uploads that s/he owns.
 
@@ -357,8 +357,12 @@ All of the upload actions, except for `placeholder`, follow the RESTful style.
 
 The `index` action is a *GET* that retrieves all the uploads.
 
+
+script file with curl request:
 `script/uploads/get-all-uploads.sh`
 
+
+curl request:
 ```curl script
 API="http://localhost:4741"
 URL_PATH="/uploads"
@@ -369,7 +373,7 @@ curl "${API}${URL_PATH}" \
   --request GET \
   --header "Authorization: Token token=$TOKEN"
 ```
-The response body will contain JSON containing an array of uploads, e.g.:
+The JSON response body will contain an array of uploads, e.g.:
 
 ```json
 {
@@ -443,11 +447,12 @@ If there are no uploads at all, the response body will contain
   ]
 }
 ```
+
+
 ### create
 
 The `create` action expects a *POST* of `image` that is created using the
-[]`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
-interface, e.g. :
+[`FormData` interface](https://developer.mozilla.org/en-US/docs/Web/API/FormData), e.g. :
 
 ```html
 <form id="add-item"  enctype="multipart/form-data">
@@ -467,8 +472,7 @@ interface, e.g. :
 ```
 
 
-If the request is successful, the response will have an HTTP Status of 201
- Created, and the body will contain JSON of the created upload, e.g.:
+If the request is successful, the response will have an HTTP Status of 201 Created, and the body will contain JSON of the created upload, e.g.:
 
 ```json
 {
@@ -489,17 +493,18 @@ If the request is successful, the response will have an HTTP Status of 201
 }
 ```
 
-If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
- Request, and the response body will be JSON describing the errors.
+If the request is unsuccessful, the response will have an HTTP Status of 400 Bad Request, and the response body will be JSON describing the errors.
 
 
  ### show
 
  The `show` action is a *GET* specifing the `id` of the upload to retrieve, e.g.:
 
-
+script file with curl request:
 `scripts\uploads\get-one-upload.sh`
 
+
+curl script:
  ```curl
  API="http://localhost:4741"
  URL_PATH="/uploads"
@@ -535,9 +540,7 @@ If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
 
  ### update
 
- #### update a game's states
-
- This `update` action expects a *PATCH* with changes to to an existing game,
+ This `update` action expects a *PATCH* with changes to an upload's `title`,
   e.g.:
 
  ```html
@@ -552,8 +555,11 @@ If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
   </fieldset>
   </form>
  ```
+
+script file with curl request:
 `scripts/uploads/update-upload.sh`
 
+curl request:
 ```curl
 API="http://localhost:4741"
 URL_PATH="/uploads"
@@ -599,13 +605,15 @@ curl "${API}${URL_PATH}/${ID}" \
  If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
   Request, and the response body will be JSON describing the errors.
 
-# Get Document Owners
+### usersWithDoc
 
 The `usersWithDoc` action is a *GET* that retrieves all the users that have
 uploads.
 
+script file with curl request:
 `scripts/users/allusers.sh`
 
+curl request:
 ```curl
 API="http://localhost:4741"
 URL_PATH="/allusers"
@@ -621,11 +629,14 @@ If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
  Request, and the response body will be JSON describing the errors.
 
 
-# Get Folders By Owner
+### uploadsByFolder
 The `uploadsByFolder` action is a *GET* that retrieves all of an owner's folders names.
 
+
+script file with curl request:
 `scripts/uploads/get-folders.sh`
 
+curl request:
 ```curl
 API="http://localhost:4741"
 URL_PATH="/folders"
@@ -656,9 +667,13 @@ If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
  Request, and the response body will be JSON describing the errors.
 
 
-# Get Documents By Folder
+###uploadsByFolder
 The `uploadsByFolder` action is a *GET* that retrieves all an owner's documents for the specified `path`.
 
+script file with curl request:
+`scripts/uploads/get-uploads-folder.sh`
+
+curl request:
 ```curl
 API="http://localhost:4741"
 URL_PATH="/uploads/folder"
@@ -706,5 +721,4 @@ If the request is successful, the response body will contain JSON containing an 
 	]
 }
 ```
-If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
- Request, and the response body will be JSON describing the errors.
+If the request is unsuccessful, the response will have an HTTP Status of 400 Bad Request, and the response body will be JSON describing the errors.

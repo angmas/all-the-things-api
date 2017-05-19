@@ -2,7 +2,7 @@
 
 API="http://localhost:4741"
 URL_PATH="/uploads"
-TOKEN=9PzDFUFD0g9qtXXOejzIibmTGyhzaYMO22BgUcFIyOI=--1/hWZ6i3xENASPkP3jkzdZWMkUORGWaaRq+JpaxzEFM=
+TOKEN="zhClMN/LSSX6sZ8M8Hhu0Et4OfOf7dcijh8CousDQLY=--ypuVTq9D8e7imcIElVLNOT62wFB0yhmwHdxI82oLOt4="
 
 curl "${API}${URL_PATH}" \
   --include \

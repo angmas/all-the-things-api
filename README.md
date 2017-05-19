@@ -310,9 +310,9 @@ Content-Type: application/json; charset=utf-8
 
 ## Upload Actions
 
-An upload is associated with a user. In the All-the-things community, a user has the ability to read and download any content, even those belonging to other users. A user may only make updates to the uploads that s/he owns.
+An upload is associated with a user. In the All The Things community, a user has the ability to read and download any content, even those belonging to other users. A user may only make updates to the uploads that s/he owns.
 
-All upload action requests must include a valid HTTP header `Authoriazation: Token token=<token>` or they will be rejected with a status of 401 Unauthorized.
+All upload action requests must include a valid HTTP header `Authorization: Token token=<token>` or they will be rejected with a status of 401 Unauthorized.
 
 All of the upload actions, except for `placeholder`, follow the RESTful style.
 
@@ -354,7 +354,7 @@ Note: `editable: true` is set for uploads whose `_owner` is the same as the user
 </tr>
 <tr>
   <td colspan="3">
-  Any user is authorized to do a GET for a single upload.
+  Any user is authorized to do a GET for a all uploads.
   </td>
   <td>401 Unauthorized</td>
   <td><em>empty</em></td>
@@ -753,9 +753,9 @@ If the request is unsuccessful the reponse will have an HTTP status of 400 Bad
    Request.
 
 
-### usersWithDoc
+### usersWithDocs
 
-The `usersWithDoc` action is a *GET* that retrieves all the users that have
+The `usersWithDocs` action is a *GET* that retrieves all the users that have
 uploads.
 
 script file with curl request:

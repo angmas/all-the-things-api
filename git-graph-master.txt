@@ -1,0 +1,84 @@
+*   4378d53 (HEAD -> master, origin/master, origin/HEAD) Merge pull request #18 from femme-squad-plus-one/dev
+|\  
+| * 5833f42 (origin/dev, dev) Remove console log
+| * f138d3e Check that passwords match
+| * fd3bbf7 Throw error when password is missing
+| *   cbf34b4 Merge pull request #16 from femme-squad-plus-one/readmeUpdate
+| |\  
+| | * 3c1dd0d (origin/readmeUpdate, readmeUpdate) More revisions.
+| | * cf9f2a4 More revisions.
+| | * 4371c4a More Revisions.
+| | * 7b8a59e Revision edits. First pass.
+| | * 9ebc410 Completed first draft of README.
+| | * adbf88e Interim commit. Still working on readme.
+| | * 1cd9921 Checkpoint commit so that I can pull dev changes.
+| | * 2b4d75a Adds authorization documentation.
+| |/  
+| *   f1be63c Merge pull request #15 from femme-squad-plus-one/fix-package-name
+| |\  
+* | \   11d8c0a Merge pull request #14 from femme-squad-plus-one/fix-package-name
+|\ \ \  
+| | |/  
+| |/|   
+| * | d2e98c8 (origin/fix-package-name) Updated version of node
+| * | 772fe88 Added npm package
+* | |   9216dc4 Merge pull request #13 from femme-squad-plus-one/fix-package-name
+|\ \ \  
+| |/ /  
+| * | 0bf5091 Rerouted script start to ./bin/express
+|/ /  
+* |   f381090 Merge pull request #12 from femme-squad-plus-one/dev
+|\ \  
+| |/  
+| *   64ae153 Merge pull request #11 from femme-squad-plus-one/modify-file-object
+| |\  
+| | * 5973736 (origin/modify-file-object) Modified uploadsByFolder function
+| |/  
+| *   ac20720 Merge pull request #10 from femme-squad-plus-one/patchtrim
+| |\  
+| | * 013d733 (origin/patchtrim) Adds edit to remove trailing/leading spaces from title
+| |/  
+| *   1a582b8 Merge pull request #9 from femme-squad-plus-one/uploads-by-user
+| |\  
+| | * ea5c8b2 (origin/uploads-by-user) Update default path to be today’s date
+| | * 9f75f90 Add two new routes for retrieving uploads
+| | * 94694c5 Add path to schema and controller
+| | * fe566cf Add new route to get uploads by user
+| |/  
+| * 7af0630 Updated curl script to test updating upload
+| * c5b2afe Commented out tags
+| *   86d9d90 Merge pull request #8 from femme-squad-plus-one/getUsersWithDocs
+| |\  
+| | * f94eeb9 (origin/getUsersWithDocs) Adds method to return array of user emails
+| * |   8568a3b Merge pull request #6 from femme-squad-plus-one/fixtitle
+| |\ \  
+| | |/  
+| | * bef2cb8 (origin/fixtitle) Defaults title to original filename when title does not exist
+| | * c30ecf1 Adds validation to prevent title larger than 140 char
+| | * 68c8fe9 Fixed code to pass title data instead of original name
+| |/  
+| *   65ed28a Merge pull request #2 from femme-squad-plus-one/add-tags
+| |\  
+| | * 6cee7d3 Adds curl script for update
+| | * 4233f36 Add tags to upload model and controller
+| |/  
+| *   1138c15 Merge pull request #1 from femme-squad-plus-one/crud-uploads
+| |\  
+| | * ba09d3e (origin/crud-uploads) Modified API documentation
+| | * b031ba8 Delete an upload
+| | * 7190926 Disallow url reassignment
+| | * 6576a23 Update title of uploaded file
+| | * ff0b743 Retrieve one upload
+| | * 787a2a2 Retrieve all of the uploaded items
+| |/  
+| *   3415ac2 Merge pull request #1 from femme-squad-plus-one/upload-auth
+| |\  
+| | * 5039e9c Add credentials to the auth scripts for testing
+| | * d22dfef Add a sample image for testing upload
+| | * 549bab1 Update path to config/database in the mongoose file
+| | * f9e60bc Add user id to the bin script for upload testing
+| | * df88f99 Add user auth to upload model and controller
+| |/  
+| * 28b6930 Add ability to upload to AWS
+|/  
+* f82c299 Initial commit using express api template

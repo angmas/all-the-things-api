@@ -72,10 +72,13 @@ const makeErrorHandler = (res, next) =>
 const signup = (req, res, next) => {
   const credentials = req.body.credentials
   const user = { email: credentials.email, password: credentials.password }
-
+  console.log(req.body.credentials)
   // error if no credentials
   if (!credentials.password) {
     res.status(400).json({error: 'Password required'})
+    throw Error()
+  } else if (credentials.password_confirmation !== credentials.password) {
+    res.status(400).json({error: 'Passwords don\'t match'})
     throw Error()
   }
   getToken()

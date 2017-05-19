@@ -2,7 +2,7 @@
 
 API="http://localhost:4741"
 URL_PATH="/sign-up"
-EMAIL=baduser
+EMAIL=user3
 PASSWORD=test
 curl "${API}${URL_PATH}" \
   --include \

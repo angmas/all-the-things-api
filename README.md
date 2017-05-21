@@ -618,7 +618,7 @@ If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
 
  ### show
 
- The `show` action is a *GET* specifying the `id` of the upload to retrieve, e.g.:
+ The `show` action is a *GET* specifying the `id` of the upload to retrieve.
 
 script file with curl request:
 `scripts\uploads\get-one-upload.sh`

@@ -781,8 +781,8 @@ If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
  Request, and the response body will be JSON describing the errors.
 
 
-### uploadsByFolder
-The `uploadsByFolder` action is a *GET* that retrieves all of an owner's folders names.
+### folders
+The `folders` action is a *GET* specifying the `_owner` that retrieves all of an owner's folders names.
 
 
 script file with curl request:

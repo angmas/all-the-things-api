@@ -660,7 +660,7 @@ curl script:
 
  ### update
 
- This `update` action expects a *PATCH* with changes to an upload's `title`,
+ This `update` action expects a *PATCH* of `upload` that is created using the `getFormFields` function,
   e.g.:
 
  ```html

@@ -819,7 +819,7 @@ If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
  Request, and the response body will be JSON describing the errors.
 
 
-###uploadsByFolder
+## uploadsByFolder
 The `uploadsByFolder` action is a *GET* that retrieves all an owner's documents for the specified `path`.
 
 script file with curl request:

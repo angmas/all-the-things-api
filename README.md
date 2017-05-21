@@ -705,22 +705,7 @@ curl "${API}${URL_PATH}/${ID}" \
  }
  ```
 
- If the request is successful, the response body will contain JSON containing an array of document owners and their respective id.
-
-```json
- {
-    "users": [
-    	{
-    		"email": "a",
-    		"id": "591c59777727f733df13226d"
-    	},
-    	{
-    		"email": "b",
-    		"id": "591c877eabc5913dc26bbfab"
-    	}
-    ]
- }
- ```
+ If the request is successful the response will have an HTTP status of 204 No Content.
 
  If the request is unsuccessful, the response will have an HTTP Status of 400 Bad Request, and the response body will be JSON describing the errors.
 

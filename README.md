@@ -314,7 +314,7 @@ An upload is associated with a user. In the All The Things community, a user has
 
 All upload action requests must include a valid HTTP header `Authorization: Token token=<token>` or they will be rejected with a status of 401 Unauthorized.
 
-All of the upload actions, except for `placeholder`, follow the RESTful style.
+All of the upload actions, follow the RESTful style.
 
 ## Description of Actions With Respect to Client Actions
 The following maps the user actions/experience with the API actions:

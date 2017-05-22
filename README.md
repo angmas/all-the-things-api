@@ -314,7 +314,7 @@ An upload is associated with a user. In the All The Things community, a user has
 
 All upload action requests must include a valid HTTP header `Authorization: Token token=<token>` or they will be rejected with a status of 401 Unauthorized.
 
-All of the upload actions, except for `placeholder`, follow the RESTful style.
+All of the upload actions, follow the RESTful style.
 
 ## Description of Actions With Respect to Client Actions
 The following maps the user actions/experience with the API actions:
@@ -618,7 +618,7 @@ If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
 
  ### show
 
- The `show` action is a *GET* specifying the `id` of the upload to retrieve, e.g.:
+ The `show` action is a *GET* specifying the `id` of the upload to retrieve.
 
 script file with curl request:
 `scripts\uploads\get-one-upload.sh`
@@ -660,7 +660,7 @@ curl script:
 
  ### update
 
- This `update` action expects a *PATCH* with changes to an upload's `title`,
+ This `update` action expects a *PATCH* of `upload` that is created using the `getFormFields` function,
   e.g.:
 
  ```html
@@ -705,22 +705,7 @@ curl "${API}${URL_PATH}/${ID}" \
  }
  ```
 
- If the request is successful, the response body will contain JSON containing an array of document owners and their respective id.
-
-```json
- {
-    "users": [
-    	{
-    		"email": "a",
-    		"id": "591c59777727f733df13226d"
-    	},
-    	{
-    		"email": "b",
-    		"id": "591c877eabc5913dc26bbfab"
-    	}
-    ]
- }
- ```
+ If the request is successful the response will have an HTTP status of 204 No Content.
 
  If the request is unsuccessful, the response will have an HTTP Status of 400 Bad Request, and the response body will be JSON describing the errors.
 
@@ -796,8 +781,8 @@ If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
  Request, and the response body will be JSON describing the errors.
 
 
-### uploadsByFolder
-The `uploadsByFolder` action is a *GET* that retrieves all of an owner's folders names.
+### folders
+The `folders` action is a *GET* specifying the `_owner` that retrieves all of an owner's folders names.
 
 
 script file with curl request:
@@ -834,7 +819,7 @@ If the request is unsuccessful, the response will have an HTTP Status of 400 Bad
  Request, and the response body will be JSON describing the errors.
 
 
-###uploadsByFolder
+### uploadsByFolder
 The `uploadsByFolder` action is a *GET* that retrieves all an owner's documents for the specified `path`.
 
 script file with curl request:
